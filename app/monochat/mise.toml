@@ -1,0 +1,6 @@
+[tools]
+ruby = "4"
+
+[tasks."db:reset"]
+description = "Reset database"
+run = "rails db:drop db:create db:migrate db:seed"

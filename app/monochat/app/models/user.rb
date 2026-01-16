@@ -23,15 +23,12 @@ class User < ApplicationRecord
     return if user_name.present?
 
     adjectives = %w[
-      Red Blue Green Silent Swift Ancient Brave Clever Dark Electric
-      Fierce Golden Hidden Icy Jade Lucky Mystic Noble Quick Royal
-      Shadow Thunder Vivid Wild Zen Cosmic Lunar Solar Stellar
+      カッコイイ カワイイ ツヨイ ヨワイ ハヤイ スバラシイ ヨクシャベル ナンデモデキル
+      カシコイ アタマガイイ
     ]
 
     nouns = %w[
-      Wolf Fox Bear Eagle Hawk Lion Tiger Dragon Phoenix Raven
-      Owl Panther Falcon Viper Cobra Leopard Shark Whale Dolphin
-      Serpent Stallion Hound Sparrow Robin Crane Badger Otter
+      うま ひつじ しか いぬ とり ねこ ちーたー ぱんだ とら ねずみ ふくろう
     ]
 
     loop do

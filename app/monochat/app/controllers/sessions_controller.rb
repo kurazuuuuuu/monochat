@@ -20,8 +20,8 @@ class SessionsController < ApplicationController
         token = JsonWebToken.encode(user_uuid: user.user_uuid)
         cookies[:monochat_token] = { value: token, httponly: true }
         
-        # TODO: Home画面にリダイレクト（現在は未実装なのでログイン画面に戻す）
-        redirect_to root_path, notice: "✓ Welcome back, #{user.user_name}!"
+        # Spaces一覧にリダイレクト
+        redirect_to spaces_path, notice: "✓ Welcome back, #{user.user_name}!"
       else
         @error = "Invalid password"
         @user_uuid = user_uuid
@@ -38,8 +38,8 @@ class SessionsController < ApplicationController
         cookies[:monochat_uuid] = { value: user.user_uuid, expires: 1.year.from_now }
         cookies[:monochat_token] = { value: token, httponly: true }
         
-        # 登録成功
-        redirect_to root_path, notice: "✓ Welcome, #{user.user_name}! Your account has been created."
+        # Spaces一覧にリダイレクト
+        redirect_to spaces_path, notice: "✓ Welcome, #{user.user_name}! Your account has been created."
       else
         @errors = user.errors.full_messages
         @user_uuid = nil
@@ -53,6 +53,6 @@ class SessionsController < ApplicationController
     # CookieからUUIDとトークンを削除
     cookies.delete(:monochat_uuid)
     cookies.delete(:monochat_token)
-    redirect_to root_path, notice: "✓ Logged out successfully. Enter a password to create a new account."
+    redirect_to login_path, notice: "✓ Logged out successfully. Enter a password to create a new account."
   end
 end

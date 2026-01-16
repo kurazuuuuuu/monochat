@@ -1,0 +1,41 @@
+<div class="container" data-controller="messages" data-messages-space-uuid-value="<%= @space.space_uuid %>">
+  <!-- Header -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-lg);">
+    <h1><%= @space.space_name %></h1>
+    <%= link_to "← Back to Spaces", spaces_path, class: "btn btn-secondary" %>
+  </div>
+
+  <!-- Messages Container -->
+  <div class="messages-container" data-messages-target="container">
+    <div id="messages-list" data-messages-target="list">
+      <!-- Messages will be loaded here via JavaScript -->
+    </div>
+  </div>
+
+  <!-- Message Input Form -->
+  <div class="message-input-container">
+    <%= form_with url: space_messages_path(@space.space_uuid),
+                  method: :post,
+                  data: {
+                    messages_target: "form",
+                    action: "submit->messages#sendMessage"
+                  },
+                  local: false do |f| %>
+      <div class="form-group">
+        <%= f.text_area :content,
+                        placeholder: "メッセージを入力...",
+                        rows: 3,
+                        class: "form-control",
+                        data: { messages_target: "input" },
+                        maxlength: 500 %>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--spacing-sm);">
+        <span class="text-muted" style="font-size: 0.85rem;" data-messages-target="charCount">0 / 500</span>
+        <%= f.submit "送信", class: "btn btn-primary", data: { messages_target: "submit" } %>
+      </div>
+
+      <div class="error-message" data-messages-target="error" style="display: none; color: var(--color-danger, #dc3545); margin-top: var(--spacing-sm); font-size: 0.85rem;"></div>
+    <% end %>
+  </div>
+</div>

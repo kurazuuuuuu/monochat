@@ -15,7 +15,20 @@ Rails.application.routes.draw do
   get "auth/me", to: "auth#me"
 
   # Session routes (HTML) - Unified auth
-  root "sessions#new"
+  get "login", to: "sessions#new"
   post "auth", to: "sessions#create"
   delete "logout", to: "sessions#destroy"
+
+  # Spaces routes
+  resources :spaces, only: [:index, :create], param: :space_uuid
+
+  # Space detail route (custom to avoid nesting issues)
+  get "spaces/:space_uuid", to: "spaces#show", as: :space
+
+  # Messages routes (use space_uuid in path)
+  get "spaces/:space_uuid/messages", to: "messages#index", as: :space_messages
+  post "spaces/:space_uuid/messages", to: "messages#create"
+
+  # Defines the root path route ("/")
+  root "spaces#index"
 end
