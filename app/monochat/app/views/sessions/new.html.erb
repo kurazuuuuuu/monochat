@@ -1,0 +1,39 @@
+<div class="auth-container">
+  <h1 class="text-center mb-lg">MonoChat</h1>
+  
+  <% if @notice || flash[:notice] %>
+    <div class="alert alert-success mb-md">
+      <%= @notice || flash[:notice] %>
+    </div>
+  <% end %>
+  
+  <% if @errors %>
+    <div class="alert alert-error mb-md">
+      <ul style="margin-left: 1.5rem; margin-bottom: 0;">
+        <% @errors.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% elsif @error %>
+    <div class="alert alert-error mb-md">
+      <%= @error %>
+    </div>
+  <% end %>
+
+  <%= form_with url: auth_path, method: :post, class: "auth-form" do |f| %>
+    <div class="form-group">
+      <%= f.label :password, @user_uuid ? "Password" : "Create Password" %>
+      <%= f.password_field :password, placeholder: @user_uuid ? "Enter your password" : "Enter a password (min. 6 characters)", autofocus: true %>
+      <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem;">
+        <% if @user_uuid %>
+          Enter your password to continue
+        <% else %>
+          A new account will be created automatically
+        <% end %>
+      </p>
+    </div>
+
+    <%= f.submit @user_uuid ? "Login" : "Create Account", class: "btn btn-full" %>
+  <% end %>
+</div>
