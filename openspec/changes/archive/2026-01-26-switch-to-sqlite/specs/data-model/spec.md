@@ -1,4 +1,4 @@
-## MODIFIED Requirements
+## ADDED Requirements
 
 ### Requirement: User Model
 システムは、ユーザー情報を管理するUserモデルをSHALL定義する。Userテーブルには、ID、UUID、ユーザー名、パスワードハッシュ、タイムスタンプが含まれる。UUIDは文字列型で保存される。
