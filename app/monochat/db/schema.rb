@@ -11,16 +11,12 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.1].define(version: 2026_01_16_064334) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_catalog.plpgsql"
-  enable_extension "pgcrypto"
-
   create_table "messages", force: :cascade do |t|
     t.text "content", null: false
     t.datetime "created_at", null: false
-    t.uuid "message_uuid", null: false
-    t.uuid "sender_uuid", null: false
-    t.uuid "space_uuid", null: false
+    t.string "message_uuid", limit: 36, null: false
+    t.string "sender_uuid", limit: 36, null: false
+    t.string "space_uuid", limit: 36, null: false
     t.datetime "updated_at", null: false
     t.index ["created_at"], name: "index_messages_on_created_at"
     t.index ["message_uuid"], name: "index_messages_on_message_uuid", unique: true
@@ -31,7 +27,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_16_064334) do
   create_table "spaces", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "space_name", null: false
-    t.uuid "space_uuid", null: false
+    t.string "space_uuid", limit: 36, null: false
     t.datetime "updated_at", null: false
     t.index ["space_uuid"], name: "index_spaces_on_space_uuid", unique: true
   end
@@ -41,7 +37,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_16_064334) do
     t.string "password_digest", null: false
     t.datetime "updated_at", null: false
     t.string "user_name", null: false
-    t.uuid "user_uuid", null: false
+    t.string "user_uuid", limit: 36, null: false
     t.index ["user_name"], name: "index_users_on_user_name", unique: true
     t.index ["user_uuid"], name: "index_users_on_user_uuid", unique: true
   end

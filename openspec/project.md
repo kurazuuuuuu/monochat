@@ -5,7 +5,7 @@ MonoChatは、完全モノクロデザインの匿名掲示板アプリケーシ
 
 ## Tech Stack
 - **Backend**: Ruby on Rails
-- **Database**: PostgreSQL (Rails標準、UUIDサポート)
+- **Database**: SQLite (開発環境)
 - **Frontend**: Rails標準のビューレイヤー (Hotwire/Turbo推奨)
 - **Authentication**: bcrypt (パスワードハッシュ化)、JWT (トークン認証)
 - **Version Management**: mise (Ruby)

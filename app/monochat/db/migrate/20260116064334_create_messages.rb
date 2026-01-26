@@ -1,9 +1,9 @@
 class CreateMessages < ActiveRecord::Migration[8.1]
   def change
     create_table :messages do |t|
-      t.uuid :message_uuid, null: false
-      t.uuid :sender_uuid, null: false
-      t.uuid :space_uuid, null: false
+      t.string :message_uuid, null: false, limit: 36
+      t.string :sender_uuid, null: false, limit: 36
+      t.string :space_uuid, null: false, limit: 36
       t.text :content, null: false
 
       t.timestamps
