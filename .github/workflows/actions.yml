@@ -1,0 +1,40 @@
+name: CI
+on:
+    push: 
+        branches: [main]
+        paths-ignore:
+        - 'k8s-manifests/**'
+        - '**.md'
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+    build-backend:
+        runs-on: ci-monochat
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+        
+        - name: Login to GitHub Container Registry
+          run: |
+            echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            
+        - name: Docker meta
+          id: meta
+          uses: docker/metadata-action@v5
+          with:
+            images: ghcr.io/${{ github.repository }}-backend
+            tags: |
+              type=ref,event=branch
+              type=ref,event=pr
+              type=sha
+
+        - name: Build and push rails image
+          uses: docker/build-push-action@v5
+          with:
+            context: app/monochat
+            push: true
+            tags: ${{ steps.meta.outputs.tags }}
+            labels: ${{ steps.meta.outputs.labels }}
