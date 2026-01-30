@@ -46,7 +46,7 @@ spec:
   selector:
     app: monochat-rails
   ports:
-  - port: 8000
-    targetPort: 8000
+  - port: 3000
+    targetPort: 3000
   type: LoadBalancer
   loadBalancerIP: 192.168.1.29
