@@ -22,7 +22,7 @@ spec:
         image: ghcr.io/kurazuuuuuu/monochat-rails:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 8000
+        - containerPort: 80
         resources:
           requests:
             memory: "512Mi"
@@ -46,7 +46,7 @@ spec:
   selector:
     app: monochat-rails
   ports:
-  - port: 3000
-    targetPort: 3000
+  - port: 80
+    targetPort: 80
   type: LoadBalancer
   loadBalancerIP: 192.168.1.29
